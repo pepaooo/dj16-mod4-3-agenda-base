@@ -40,15 +40,15 @@ public class ContactTypeAPP {
 
 		// Actualización de un ContactType
 
-		List<Contact> allContacts = contactService.getAllContacts();
-		System.out.println("Los contactos son:" + allContacts);
-
-		if (allContacts != null && ! allContacts.isEmpty()) {
-			System.out.println("Los contactos son:");
-			for (Contact contact : allContacts) {
-				System.out.println(contact.toString());
-			}
-		}
+//		List<Contact> allContacts = contactService.getAllContacts();
+//		System.out.println("Los contactos son:" + allContacts);
+//
+//		if (allContacts != null && ! allContacts.isEmpty()) {
+//			System.out.println("Los contactos son:");
+//			for (Contact contact : allContacts) {
+//				System.out.println(contact.toString());
+//			}
+//		}
 
 	}
 }
