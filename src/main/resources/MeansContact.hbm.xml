@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Hibernate, Relational Persistence for Idiomatic Java
+  ~
+  ~ License: GNU Lesser General Public License (LGPL), version 2.1 or later.
+  ~ See the lgpl.txt file in the root directory or <http://www.gnu.org/licenses/lgpl-2.1.html>.
+  -->
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="edu.unam.agenda.model">
+    <class name="edu.unam.agenda.model.MeansContacts" table="means_contact">
+        <id name="id" column="means_contact_id">
+            <generator class="identity"/>
+        </id>
+        <property name="value" column="value" type="string" length="300"/>
+        <many-to-one name="contact" column="contact_id" lazy="false"
+        	class="edu.unam.agenda.model.Contact"/>
+        <many-to-one name="phoneType" column="phone_type_id" lazy="false"
+        	class="edu.unam.agenda.model.PhoneType"/>
+    </class>
+</hibernate-mapping>
