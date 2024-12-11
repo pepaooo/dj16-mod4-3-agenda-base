@@ -163,7 +163,7 @@ public class AgendaAPP {
     }
 
     private void cargaMenuContactType() {
-        System.out.println("Tipo de teléfono");
+        System.out.println("Tipo de contacto");
         System.out.println("1. Ver todos los tipos de contactos");
         System.out.println("2. Buscar tipo de contacto por ID");
         System.out.println("3. Insertar tipo de contacto");
