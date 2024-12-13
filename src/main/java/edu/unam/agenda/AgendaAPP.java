@@ -83,9 +83,12 @@ public class AgendaAPP {
                 case 2 -> findById(phoneTypeService::getPhoneTypeById);
                 case 3 -> insertPhoneType();
                 case 4 -> updatePhoneType();
+//                case 5 -> deleteById(
+//                        id -> phoneTypeService.deletePhoneType(phoneTypeService.getPhoneTypeById(id)),
+//                        phoneTypeService::getPhoneTypeById
+//                );
                 case 5 -> deleteById(
-                        id -> phoneTypeService.deletePhoneType(phoneTypeService.getPhoneTypeById(id)),
-                        phoneTypeService::getPhoneTypeById
+                        id -> phoneTypeService.deletePhoneType(phoneTypeService.getPhoneTypeById(id))
                 );
                 case 6 -> {
                     System.out.println("Regresando...");
@@ -105,9 +108,12 @@ public class AgendaAPP {
                 case 2 -> findById(contactTypeService::getContactTypeById);
                 case 3 -> insertContactType();
                 case 4 -> updateContactType();
+//                case 5 -> deleteById(
+//                        id -> contactTypeService.deleteContactType(contactTypeService.getContactTypeById(id)),
+//                        contactTypeService::getContactTypeById
+//                );
                 case 5 -> deleteById(
-                        id -> contactTypeService.deleteContactType(contactTypeService.getContactTypeById(id)),
-                        contactTypeService::getContactTypeById
+                        id -> contactTypeService.deleteContactType(contactTypeService.getContactTypeById(id))
                 );
                 case 6 -> {
                     System.out.println("Regresando...");
@@ -219,6 +225,13 @@ public class AgendaAPP {
             System.out.println("No se encontró un registro con el ID: " + id);
             return;
         }
+        boolean success = deleter.apply(id);
+        System.out.println(success ? "Registro eliminado correctamente." : "Error al eliminar el registro.");
+    }
+
+    private void deleteById(ServiceFunction<Integer, Boolean> deleter) {
+        System.out.print("Ingresa el ID: ");
+        int id = getUserOption();
         boolean success = deleter.apply(id);
         System.out.println(success ? "Registro eliminado correctamente." : "Error al eliminar el registro.");
     }
