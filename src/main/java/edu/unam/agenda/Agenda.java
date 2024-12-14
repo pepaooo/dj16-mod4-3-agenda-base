@@ -25,7 +25,8 @@ public class Agenda {
 		ContactTypeService contactTypeService = ContactTypeServiceImpl.getInstance();
 		PhoneTypeService phoneTypeService = PhoneTypeServiceImpl.getInstance();
 		ContactService contactService = ContactServiceImpl.getInstance();
-		
+
+		/*
 		List<ContactType> tiposContacto = contactTypeService.getAllContactType();
 		for (ContactType contactType : tiposContacto) {
 			System.out.println("El tipo contacto es:" + contactType.getName());
@@ -36,8 +37,17 @@ public class Agenda {
 		for (PhoneType phoneType : mediosContacto) {
 			System.out.println("El medio contacto es:" + phoneType.getName());
 		}
-		PhoneType casa = phoneTypeService.getPhoneTypeById(1);
-		System.out.println("El medio casa===" + casa);
+		*/
+
+		Contact contacto = contactService.getContactById(1);
+		System.out.println("El contacto es:" + contacto);
+		contacto.getMeansContacts().forEach(System.out::println);
+
+//		PhoneType casa = phoneTypeService.getPhoneTypeById(1);
+//		System.out.println("El medio casa===" + casa);
+//
+//		List<MeansContacts> contactosMedio = contactService.getPhoneTypes(casa); //obtencion de contactos por medio
+//		System.out.println("Los contactos de casa son:" + contactosMedio);
 
 		/*Contact papa = new Contact();//creacion de contacto
 		papa.setName("Panchito");

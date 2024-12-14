@@ -7,7 +7,8 @@
 		<property name="hibernate.connection.driver_class">org.mariadb.jdbc.Driver</property>
 		<property name="hibernate.connection.url">jdbc:mariadb://localhost:3306/agenda</property>
 		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">mysecretpassword</property>
+<!--		<property name="hibernate.connection.password">mysecretpassword</property>-->
+		<property name="hibernate.connection.password">mypass</property>
         <property name="hibernate.default_schema">agenda</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MariaDBDialect</property>
         <!-- JDBC connection pool (use the built-in) -->
