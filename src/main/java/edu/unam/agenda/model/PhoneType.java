@@ -1,8 +1,20 @@
 package edu.unam.agenda.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "phone_type")
 public class PhoneType {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "phone_type_id")
 	private Integer id;
+
+	@Column(name = "name", length = 50)
 	private String name;
+
+	@Column(name = "status", length = 50)
 	private String status;
 
 	public Integer getId() {

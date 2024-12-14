@@ -22,7 +22,8 @@
 		<property name="hbm2ddl.auto">none</property>
 		<property name="hibernate.transform_hbm_xml.enabled">true</property>
 		<!-- create -->
-		<mapping resource="PhoneType.hbm.xml"/>
+<!--		<mapping resource="PhoneType.hbm.xml"/>-->
+		<mapping class="edu.unam.agenda.model.PhoneType"/>
 		<mapping resource="ContactType.hbm.xml"/>
 		<mapping resource="Contact.hbm.xml"/>
 		<mapping resource="MeansContact.hbm.xml"/>
