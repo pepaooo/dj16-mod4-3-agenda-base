@@ -1,9 +1,25 @@
 package edu.unam.agenda.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "means_contact")
 public class MeansContacts {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "means_contact_id")
 	private Integer id;
+
+	@Column(name = "value", length = 300)
 	private String value;
+
+	@ManyToOne
+	@JoinColumn(name = "contact_id", nullable = false)
 	private Contact contact;
+
+	@ManyToOne
+	@JoinColumn(name = "phone_type_id", nullable = false)
 	private PhoneType phoneType;
 	
 	public Integer getId() {

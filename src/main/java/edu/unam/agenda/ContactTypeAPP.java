@@ -23,15 +23,15 @@ public class ContactTypeAPP {
 		for (ContactType contactType : listContactType)
 			System.out.println(contactType.toString());
 
-		System.out.println("Carga Tipos Contacto por Id");
-		ContactType contactType = contactTypeService.getContactTypeById(1);
-		System.out.println(contactType.toString());
+//		System.out.println("Carga Tipos Contacto por Id");
+//		ContactType contactType = contactTypeService.getContactTypeById(1);
+//		System.out.println(contactType.toString());
 
 		// Creación de un ContactType
-		ContactType contactType2 = new ContactType();
-		contactType2.setName("Amigos");
-		contactType2.setStatus("ACTIVO");
-		contactTypeService.insertContactType(contactType2);
+//		ContactType contactType2 = new ContactType();
+//		contactType2.setName("Amigos");
+//		contactType2.setStatus("ACTIVO");
+//		contactTypeService.insertContactType(contactType2);
 
 //		System.out.println("Carga Tipos Contacto");
 //		listContactType = contactTypeService.getAllContactType();

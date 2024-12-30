@@ -1,37 +1,49 @@
 package edu.unam.agenda.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "contact_type")
 public class ContactType {
-	private Integer id;
-	private String name;
-	private String status;
 
-	public Integer getId() {
-		return id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "contact_type_id")
+    private Integer id;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @Column(name = "name", length = 50)
+    private String name;
 
-	public String getName() {
-		return name;
-	}
+    @Column(name = "status", length = 50)
+    private String status;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public String getName() {
+        return name;
+    }
 
-	@Override
-	public String toString() {
-		return "TipoContacto [id=" + id + ", nombre=" + name + ", estatus=" + status + ", hashCode()=" + hashCode()
-				+ "]";
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "TipoContacto [id=" + id + ", nombre=" + name + ", estatus=" + status + ", hashCode()=" + hashCode()
+                + "]";
+    }
 }

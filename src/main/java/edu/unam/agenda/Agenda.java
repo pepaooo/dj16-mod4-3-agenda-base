@@ -41,7 +41,7 @@ public class Agenda {
 
 		Contact contacto = contactService.getContactById(1);
 		System.out.println("El contacto es:" + contacto);
-		contacto.getMeansContacts().forEach(System.out::println);
+//		contacto.getMeansContacts().forEach(System.out::println);
 
 //		PhoneType casa = phoneTypeService.getPhoneTypeById(1);
 //		System.out.println("El medio casa===" + casa);
