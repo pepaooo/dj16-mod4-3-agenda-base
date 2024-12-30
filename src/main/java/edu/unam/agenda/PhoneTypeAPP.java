@@ -12,30 +12,35 @@ import java.util.List;
 
 public class PhoneTypeAPP {
 
-	public static void main(String[] args) {
-		HibernateUtil.init();
-		
-		PhoneTypeService phoneTypeService = PhoneTypeServiceImpl.getInstance();
-		ContactService contactService = ContactServiceImpl.getInstance();
+    public static void main(String[] args) {
+        HibernateUtil.init();
 
-		System.out.println("Carga Tipos Telefonos");
-		List<PhoneType> listPhoneType = phoneTypeService.getAllPhoneTypes();
-		for (PhoneType phone : listPhoneType)
-			System.out.println(phone.toString());
+        PhoneTypeService phoneTypeService = PhoneTypeServiceImpl.getInstance();
+        ContactService contactService = ContactServiceImpl.getInstance();
 
-		System.out.println("Carga Tipos Telefonos por Id");
-		PhoneType phoneType = phoneTypeService.getPhoneTypeById(1);
-		System.out.println(phoneType.toString());
-		
-//		List<MeansContacts> contactosMedio = contactService.getPhoneTypes(phoneType);
-//
-//		if (contactosMedio != null && ! contactosMedio.isEmpty()) {
-//			System.out.println("Los números de medio de contacto:" + phoneType.getName());
-//			for (MeansContacts meansContacts : contactosMedio) {
-//				System.out.println("El número es:"
-//						+ meansContacts.getValue()
-//						+ " y el nombre del contacto es:" + meansContacts.getContact().getName());
-//			}
-//		}
-	}
+        System.out.println("Carga Tipos Telefonos");
+        List<PhoneType> listPhoneType = phoneTypeService.getAllPhoneTypes();
+        for (PhoneType phone : listPhoneType)
+            System.out.println(phone.toString());
+
+        System.out.println("Carga Tipos Telefonos por Id");
+        PhoneType phoneType = phoneTypeService.getPhoneTypeById(4);
+
+        if (phoneType != null) {
+            System.out.println(phoneType.toString());
+            List<MeansContacts> contactosMedio = contactService.getPhoneTypes(phoneType);
+            if (contactosMedio != null && !contactosMedio.isEmpty()) {
+                System.out.println("Contactos encontrados: " + contactosMedio.size());
+                System.out.println("Los números de medio de contacto: " + phoneType.getName());
+                for (MeansContacts meansContacts : contactosMedio) {
+                    System.out.println("El número es: "
+                            + meansContacts.getValue()
+                            + " y el nombre del contacto es: " + meansContacts.getContact().getName());
+                }
+            } else {
+                System.out.println("No se encontraron contactos con el medio de contacto: " + phoneType.getName());
+            }
+        }
+
+    }
 }
