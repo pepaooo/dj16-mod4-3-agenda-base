@@ -50,7 +50,7 @@ public class ContactDAOImpl implements ContactDAO {
             Session session = HibernateUtil.getSessionFactory().openSession();
             // se inicia una transaccion
             session.beginTransaction();
-            contactList = session.createQuery("SELECT t FROM Contact t WHERE t.status = 'ACTIVO' ", Contact.class).getResultList();
+            contactList = session.createQuery("SELECT t FROM Contact t", Contact.class).getResultList();
             // se realiza el commit
             session.getTransaction().commit();
             // se cierra la session hibernate
@@ -145,7 +145,6 @@ public class ContactDAOImpl implements ContactDAO {
             e.printStackTrace();
             StandardServiceRegistryBuilder.destroy(HibernateUtil.getRegistry());
         }
-
 
         return meansContactsList;
     }
