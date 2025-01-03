@@ -118,7 +118,7 @@ public class AgendaAPP {
 
     private void insertMeansContacts() {
         System.out.print("Ingresa el ID del contacto: ");
-        int contactId = getUserOption();
+        int contactId = Integer.parseInt(scanner.nextLine());
         Contact contact = contactService.getContactById(contactId);
 
         if (contact == null) {
@@ -127,7 +127,7 @@ public class AgendaAPP {
         }
 
         System.out.print("Ingresa el ID del tipo de teléfono: ");
-        int phoneTypeId = getUserOption();
+        int phoneTypeId = Integer.parseInt(scanner.nextLine());
         PhoneType phoneType = phoneTypeService.getPhoneTypeById(phoneTypeId);
 
         if (phoneType == null) {
@@ -149,7 +149,7 @@ public class AgendaAPP {
 
     private void updateMeansContacts() {
         System.out.print("Ingresa el ID del contacto: ");
-        int contactId = getUserOption();
+        int contactId = Integer.parseInt(scanner.nextLine());
         Contact contact = contactService.getContactById(contactId);
 
         if (contact == null) {
@@ -162,7 +162,7 @@ public class AgendaAPP {
         currentMeansContacts.forEach(System.out::println);
 
         System.out.print("Ingresa el ID del medio de contacto a actualizar: ");
-        int meansContactsId = getUserOption();
+        int meansContactsId = Integer.parseInt(scanner.nextLine());
         MeansContacts meansContacts = currentMeansContacts
                 .stream()
                 .filter(m -> m.getId() == meansContactsId)
@@ -189,7 +189,7 @@ public class AgendaAPP {
             phoneTypes.forEach(System.out::println);
 
             System.out.print("Ingresa el ID del tipo de teléfono: ");
-            int phoneTypeId = getUserOption();
+            int phoneTypeId = Integer.parseInt(scanner.nextLine());
             PhoneType phoneType = phoneTypeService.getPhoneTypeById(phoneTypeId);
 
             if (phoneType == null) {
@@ -256,7 +256,7 @@ public class AgendaAPP {
         contactTypes.forEach(System.out::println);
 
         System.out.print("Ingresa el ID del tipo de contacto: ");
-        int contactTypeId = getUserOption();
+        int contactTypeId = Integer.parseInt(scanner.nextLine());
         ContactType contactType = contactTypeService.getContactTypeById(contactTypeId);
 
         if (contactType == null) {
@@ -271,7 +271,7 @@ public class AgendaAPP {
         phoneTypes.forEach(System.out::println);
 
         System.out.print("Ingresa el ID del tipo de teléfono: ");
-        int phoneTypeId = getUserOption();
+        int phoneTypeId = Integer.parseInt(scanner.nextLine());
         PhoneType phoneType = phoneTypeService.getPhoneTypeById(phoneTypeId);
 
         if (phoneType == null) {
@@ -296,7 +296,7 @@ public class AgendaAPP {
 
     private void updateContact() {
         System.out.print("Ingresa el ID del contacto a modificar: ");
-        int id = getUserOption();
+        int id = Integer.parseInt(scanner.nextLine());
 
         Contact contact = contactService.getContactById(id);
         if (contact == null) {
@@ -338,7 +338,7 @@ public class AgendaAPP {
             contactTypes.forEach(System.out::println);
 
             System.out.print("Ingresa el ID del tipo de contacto: ");
-            int contactTypeId = getUserOption();
+            int contactTypeId = Integer.parseInt(scanner.nextLine());;
             ContactType contactType = contactTypeService.getContactTypeById(contactTypeId);
 
             if (contactType == null) {
@@ -401,7 +401,7 @@ public class AgendaAPP {
 
     private void updatePhoneType() {
         System.out.print("Ingresa el ID del tipo de teléfono: ");
-        int id = getUserOption();
+        int id = Integer.parseInt(scanner.nextLine());
         PhoneType phoneType = phoneTypeService.getPhoneTypeById(id);
 
         if (phoneType == null) {
@@ -474,7 +474,7 @@ public class AgendaAPP {
 
     private void updateContactType() {
         System.out.print("Ingresa el ID del tipo de contacto: ");
-        int id = getUserOption();
+        int id = Integer.parseInt(scanner.nextLine());
         ContactType contactType = contactTypeService.getContactTypeById(id);
 
         if (contactType == null) {
