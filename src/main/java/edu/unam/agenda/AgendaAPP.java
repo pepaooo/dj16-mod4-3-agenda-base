@@ -126,6 +126,10 @@ public class AgendaAPP {
             return;
         }
 
+        System.out.println("Tipos de teléfono a elegir: ");
+        List<PhoneType> phoneTypes = phoneTypeService.getAllPhoneTypes();
+        phoneTypes.forEach(System.out::println);
+
         System.out.print("Ingresa el ID del tipo de teléfono: ");
         int phoneTypeId = Integer.parseInt(scanner.nextLine());
         PhoneType phoneType = phoneTypeService.getPhoneTypeById(phoneTypeId);
