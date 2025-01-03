@@ -69,7 +69,8 @@ public class Contact {
 	@Override
 	public String toString() {
 		return "Contacto [id=" + id + ", nombre=" + name + ", apellidos=" + lastName + ", edad=" + age
-				+ ", direccion=" + address + ", tipoContacto=" + contactType + ", contactosMedios=" + meansContacts
-				+ "]";
+				+ ", direccion=" + address + ", tipoContacto=" + contactType +
+				//", contactosMedios=" + meansContacts +
+				"]";
 	}
 }

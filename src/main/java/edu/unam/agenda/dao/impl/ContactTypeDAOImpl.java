@@ -21,7 +21,7 @@ public class ContactTypeDAOImpl implements ContactTypeDAO {
 			instance = new ContactTypeDAOImpl();
 		return instance;
 	}
-	
+
 	@Override
 	public ContactType getContactTypeById(Integer id) {
 		ContactType contactType = null;
@@ -40,7 +40,7 @@ public class ContactTypeDAOImpl implements ContactTypeDAO {
 		}
 		return contactType;
 	}
-	
+
 	@Override
 	public List<ContactType> getAllContactType() {
 		List<ContactType> contactTypeList = null;
@@ -59,8 +59,8 @@ public class ContactTypeDAOImpl implements ContactTypeDAO {
 			StandardServiceRegistryBuilder.destroy(HibernateUtil.getRegistry());
 		}
 		return contactTypeList;
-	}	
-	
+	}
+
 	@Override
 	public Boolean insertContactType(ContactType contactType) {
 		Boolean save = Boolean.FALSE;
@@ -80,7 +80,7 @@ public class ContactTypeDAOImpl implements ContactTypeDAO {
 		}
 		return save;
 	}
-	
+
 	@Override
 	public Boolean updateContactType(ContactType contactType) {
 		Boolean update = Boolean.FALSE;
@@ -100,7 +100,7 @@ public class ContactTypeDAOImpl implements ContactTypeDAO {
 		}
 		return update;
 	}
-	
+
 	@Override
 	public Boolean deleteContactType(ContactType contactType) {
 		Boolean delete = Boolean.FALSE;

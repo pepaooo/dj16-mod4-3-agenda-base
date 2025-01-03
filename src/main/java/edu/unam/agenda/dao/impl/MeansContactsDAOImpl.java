@@ -59,7 +59,7 @@ public class MeansContactsDAOImpl implements MeansContactsDAO {
 		}
 		return meansContactsList;
 	}
-	
+
 	@Override
 	public List<MeansContacts> getMeansContactsByContact(Integer id) {
 		List<MeansContacts> meansContactsList = null;

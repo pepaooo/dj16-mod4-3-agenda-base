@@ -24,7 +24,7 @@ public class PhoneTypeDAOImpl implements PhoneTypeDAO {
 	public PhoneType getPhoneTypeById(Integer id) {
 		PhoneType phoneType = null;
 		try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
+			Session session = HibernateUtil.getSessionFactory().openSession();
 			// se inicia una transaccion
 			session.beginTransaction();
 			phoneType = session.get(PhoneType.class, id);
@@ -38,7 +38,7 @@ public class PhoneTypeDAOImpl implements PhoneTypeDAO {
 		}
 		return phoneType;
 	}
-	
+
 	@Override
 	public List<PhoneType> getAllPhoneTypes() {
 		List<PhoneType> phoneTypeList = null;
@@ -58,7 +58,7 @@ public class PhoneTypeDAOImpl implements PhoneTypeDAO {
 		}
 		return phoneTypeList;
 	}
-	
+
 	@Override
 	public Boolean insertPhoneType(PhoneType phoneType) {
 		Boolean save = Boolean.FALSE;
@@ -78,7 +78,7 @@ public class PhoneTypeDAOImpl implements PhoneTypeDAO {
 		}
 		return save;
 	}
-	
+
 	@Override
 	public Boolean updatePhoneType(PhoneType phoneType) {
 		Boolean update = Boolean.FALSE;
@@ -98,7 +98,7 @@ public class PhoneTypeDAOImpl implements PhoneTypeDAO {
 		}
 		return update;
 	}
-	
+
 	@Override
 	public Boolean deletePhoneType(PhoneType phoneType) {
 		Boolean delete = Boolean.FALSE;

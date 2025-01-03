@@ -40,6 +40,8 @@ public class MeansContacts {
 
 	@Override
 	public String toString() {
-		return "ContactoMedio [id=" + id + ", valor=" + value + "]";
+		return "MedioContacto [id=" + id + ", valor=" + value +
+				", contacto=" + contact + ", tipoTelefono=" + phoneType +
+				"]";
 	}
 }
