@@ -1,6 +1,6 @@
 package edu.unam.agenda.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "means_contact")
