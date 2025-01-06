@@ -1,102 +1,57 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Versión del servidor:         10.5.12-MariaDB - mariadb.org binary distribution
--- SO del servidor:              Win64
--- HeidiSQL Versión:             11.3.0.6295
--- --------------------------------------------------------
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
 
 -- Volcando estructura de base de datos para agenda
 DROP DATABASE IF EXISTS `agenda`;
-CREATE DATABASE IF NOT EXISTS `agenda` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE IF NOT EXISTS `agenda`;
 USE `agenda`;
 
--- Volcando estructura para tabla agenda.phone_type
-DROP TABLE IF EXISTS `phone_type`;
-CREATE TABLE IF NOT EXISTS `phone_type` (
-  `phone_type_id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `status` varchar(50) NOT NULL,
-  PRIMARY KEY (`phone_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS tipo_membresia;
+CREATE TABLE IF NOT EXISTS tipo_membresia (
+    id_tipo_membresia INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre_tipo VARCHAR(50) NOT NULL UNIQUE,
+    tarifa DECIMAL(10,2) NOT NULL CHECK (tarifa >= 0),
+    duracion_dias INT NOT NULL CHECK (duracion_dias > 0)
+);
 
--- Volcando datos para la tabla agenda.phone_type: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `phone_type` DISABLE KEYS */;
-INSERT INTO `phone_type` (`phone_type_id`, `name`, `status`) VALUES
-	(1, 'Teléfono casa', 'ACTIVO'),
-	(2, 'Teléfono trabajo', 'ACTIVO'),
-	(3, 'Teléfono celular', 'ACTIVO');
-/*!40000 ALTER TABLE `phone_type` ENABLE KEYS */;
+CREATE TABLE IF NOT EXISTS miembro (
+    id_miembro INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    apellidos VARCHAR(50) NOT NULL,
+    direccion VARCHAR(255) NOT NULL,
+    telefono VARCHAR(20) NOT NULL,
+    correo_electronico VARCHAR(100) NOT NULL UNIQUE,
+    fecha_nacimiento DATE NOT NULL,
+    genero VARCHAR(1) NOT NULL CHECK (genero IN ('M', 'F', 'O')),
+    fecha_inscripcion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    id_tipo_membresia INT NOT NULL,
+    CONSTRAINT uq_miembro UNIQUE (nombre, apellidos, fecha_nacimiento, genero),
+    CONSTRAINT fk_miembro_tipo_membresia
+    FOREIGN KEY (id_tipo_membresia) REFERENCES tipo_membresia (id_tipo_membresia)
+);
 
--- Volcando estructura para tabla agenda.contact_type
-DROP TABLE IF EXISTS `contact_type`;
-CREATE TABLE IF NOT EXISTS `contact_type` (
-  `contact_type_id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `status` varchar(50) NOT NULL,
-  PRIMARY KEY (`contact_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+-- Volcando datos para la tabla tipo_membresia
+INSERT INTO tipo_membresia (nombre_tipo, tarifa, duracion_dias) VALUES
+    ('Basica', 300.00, 30),
+    ('Estandar', 500.00, 30),
+    ('Premium', 700.00, 30),
+    ('Anual_Basica', 3200.00, 365),
+    ('Anual_Premium', 6000.00, 365),
+    ('VIP', 1200.00, 30),
+    ('Familiar', 900.00, 30),
+    ('Estudiantil', 250.00, 30),
+    ('Oro', 1000.00, 60),
+    ('Platino', 2000.00, 90);
 
--- Volcando datos para la tabla agenda.contact_type: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `contact_type` DISABLE KEYS */;
-INSERT INTO `contact_type` (`contact_type_id`, `name`, `status`) VALUES
-	(1, 'Familiar', 'ACTIVO'),
-	(2, 'Escolar', 'ACTIVO'),
-	(3, 'Laboral', 'ACTIVO');
-/*!40000 ALTER TABLE `contact_type` ENABLE KEYS */;
-
--- Volcando estructura para tabla agenda.contact
-DROP TABLE IF EXISTS `contact`;
-CREATE TABLE IF NOT EXISTS `contact` (
-  `contact_id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `last_name` varchar(200) NOT NULL,
-  `age` tinyint NOT NULL DEFAULT 0,
-  `address` text NOT NULL,
-  `contact_type_id` int NOT NULL DEFAULT 0,
-  PRIMARY KEY (`contact_id`),
-  KEY `fk_contact_type` (`contact_type_id`),
-  CONSTRAINT `fk_contact_type` FOREIGN KEY (`contact_type_id`) REFERENCES `contact_type` (`contact_type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Volcando datos para la tabla agenda.contact: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `contact` DISABLE KEYS */;
-INSERT INTO `contact` (`contact_id`, `name`, `last_name`, `age`, `address`, `contact_type_id`) VALUES
-  (1, 'Victor', 'Garcia', 36, 'Av. Siempre Viva 123', 3),
-  (2, 'Sandra', 'Sanchez', 34, 'Camino viejo a Rodeo 234', 2),
-  (3, 'Ana', 'Serna', 50, 'Carr. Mich a+t 345', 1);
-/*!40000 ALTER TABLE `contact` ENABLE KEYS */;
-
--- Volcando estructura para tabla agenda.means_contact
-DROP TABLE IF EXISTS `means_contact`;
-CREATE TABLE IF NOT EXISTS `means_contact` (
-  `means_contact_id` int NOT NULL AUTO_INCREMENT,
-  `value` varchar(300) NOT NULL,
-  `contact_id` int NOT NULL,
-  `phone_type_id` int NOT NULL,
-  PRIMARY KEY (`means_contact_id`),
-  KEY `fk_phone_type` (`phone_type_id`),
-  KEY `fk_contact` (`contact_id`),
-  CONSTRAINT `fk_contact` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`contact_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_phone_type` FOREIGN KEY (`phone_type_id`) REFERENCES `phone_type` (`phone_type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Volcando datos para la tabla agenda.means_contact: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `means_contact` DISABLE KEYS */;
-INSERT INTO `means_contact` (`means_contact_id`, `value`, `contact_id`, `phone_type_id`) VALUES
-  (1, 'A', 3, 3),
-  (2, 'B', 1, 2),
-  (3, 'C', 2, 1);
-/*!40000 ALTER TABLE `means_contact` ENABLE KEYS */;
-
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+-- Volcado de datos para la tabla miembro
+INSERT INTO miembro
+(nombre, apellidos, direccion, telefono, correo_electronico, fecha_nacimiento, genero, id_tipo_membresia)
+VALUES
+    ('Juan', 'Perez', 'Calle 1, Ciudad', '5551234567', 'juan.perez@example.com', '1990-01-01', 'M', 1),
+    ('Maria', 'Lopez', 'Calle 2, Ciudad', '5551234568', 'maria.lopez@example.com', '1992-05-10', 'F', 2),
+    ('Carlos', 'Gomez', 'Calle 3, Ciudad', '5551234569', 'carlos.gomez@example.com', '1985-03-15', 'M', 3),
+    ('Lucia', 'Hernandez', 'Calle 4, Ciudad', '5551234570', 'lucia.hernandez@example.com', '1995-07-20', 'F', 4),
+    ('Miguel', 'Ramirez', 'Calle 5, Ciudad', '5551234571', 'miguel.ramirez@example.com', '1988-11-11', 'M', 5),
+    ('Sofia', 'Martinez', 'Calle 6, Ciudad', '5551234572', 'sofia.martinez@example.com', '1993-12-05', 'F', 6),
+    ('Roberto', 'Jimenez', 'Calle 7, Ciudad', '5551234573', 'roberto.jimenez@example.com', '1980-02-25', 'M', 7),
+    ('Ana', 'Castillo', 'Calle 8, Ciudad', '5551234574', 'ana.castillo@example.com', '1994-09-18', 'F', 8),
+    ('David', 'Garcia', 'Calle 9, Ciudad', '5551234575', 'david.garcia@example.com', '1986-06-30', 'M', 9),
+    ('Elena', 'Morales', 'Calle 10, Ciudad', '5551234576', 'elena.morales@example.com', '1991-04-22', 'F', 10);

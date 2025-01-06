@@ -1,36 +1,34 @@
-package edu.unam.agenda.dao.impl;
+package dj16.com.clubdeportivo.dao.impl;
 
-import edu.unam.agenda.dao.ContactDAO;
-import edu.unam.agenda.hibernate.HibernateUtil;
-import edu.unam.agenda.model.Contact;
-import edu.unam.agenda.model.ContactType;
-import edu.unam.agenda.model.MeansContacts;
-import edu.unam.agenda.model.PhoneType;
+import dj16.com.clubdeportivo.dao.TipoMembresiaDAO;
+import dj16.com.clubdeportivo.hibernate.HibernateUtil;
+import dj16.com.clubdeportivo.model.TipoMembresia;
 import org.hibernate.Session;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import java.util.List;
 
-public class ContactDAOImpl implements ContactDAO {
-    private static ContactDAOImpl instance;
+public class TipoMembresiaDAOImpl implements TipoMembresiaDAO {
 
-    private ContactDAOImpl() {
+    private static TipoMembresiaDAOImpl instance;
+
+    private TipoMembresiaDAOImpl() {
     }
 
-    public static ContactDAOImpl getInstance() {
+    public static TipoMembresiaDAOImpl getInstance() {
         if (instance == null)
-            instance = new ContactDAOImpl();
+            instance = new TipoMembresiaDAOImpl();
         return instance;
     }
 
     @Override
-    public Contact getContactById(Integer id) {
-        Contact contact = null;
+    public TipoMembresia getTipoMembresiaById(Integer id) {
+        TipoMembresia TipoMembresia = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             // se inicia una transaccion
             session.beginTransaction();
-            contact = session.get(Contact.class, id);
+            TipoMembresia = session.get(TipoMembresia.class, id);
             // se realiza el commit
             session.getTransaction().commit();
             // se cierra la session hibernate
@@ -39,18 +37,17 @@ public class ContactDAOImpl implements ContactDAO {
             e.printStackTrace();
             StandardServiceRegistryBuilder.destroy(HibernateUtil.getRegistry());
         }
-        return contact;
+        return TipoMembresia;
     }
 
     @Override
-    public List<Contact> getAllContacts() {
-        List<Contact> contactList = null;
-        List<ContactType> contactTypeList = null;
+    public List<TipoMembresia> getAllTipoMembresia() {
+        List<TipoMembresia> TipoMembresiaList = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             // se inicia una transaccion
             session.beginTransaction();
-            contactList = session.createQuery("SELECT t FROM Contact t", Contact.class).getResultList();
+            TipoMembresiaList = session.createQuery("FROM TipoMembresia", TipoMembresia.class).getResultList();
             // se realiza el commit
             session.getTransaction().commit();
             // se cierra la session hibernate
@@ -59,18 +56,18 @@ public class ContactDAOImpl implements ContactDAO {
             e.printStackTrace();
             StandardServiceRegistryBuilder.destroy(HibernateUtil.getRegistry());
         }
-        return contactList;
+        return TipoMembresiaList;
     }
 
     @Override
-    public Boolean insertContact(Contact contact) {
+    public Boolean insertTipoMembresia(TipoMembresia TipoMembresia) {
         Boolean save = Boolean.FALSE;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             // se inicia una transaccion
             session.beginTransaction();
-            session.persist(contact);
-            save = contact.getId() != null ? Boolean.TRUE : Boolean.FALSE;
+            session.persist(TipoMembresia);
+            save = TipoMembresia.getId() != null ? Boolean.TRUE : Boolean.FALSE;
             // se realiza el commit
             session.getTransaction().commit();
             // se cierra la session hibernate
@@ -83,14 +80,14 @@ public class ContactDAOImpl implements ContactDAO {
     }
 
     @Override
-    public Boolean updateContact(Contact contact) {
+    public Boolean updateTipoMembresia(TipoMembresia TipoMembresia) {
         Boolean update = Boolean.FALSE;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             // se inicia una transaccion
             session.beginTransaction();
-            session.merge(contact);
-            update = contact.getId() != null ? Boolean.TRUE : Boolean.FALSE;
+            session.merge(TipoMembresia);
+            update = TipoMembresia.getId() != null ? Boolean.TRUE : Boolean.FALSE;
             // se realiza el commit
             session.getTransaction().commit();
             // se cierra la session hibernate
@@ -103,14 +100,14 @@ public class ContactDAOImpl implements ContactDAO {
     }
 
     @Override
-    public Boolean deleteContact(Contact contact) {
+    public Boolean deleteTipoMembresia(TipoMembresia TipoMembresia) {
         Boolean delete = Boolean.FALSE;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             // se inicia una transaccion
             session.beginTransaction();
-            session.remove(contact);
-            delete = contact.getId() != null ? Boolean.TRUE : Boolean.FALSE;
+            session.remove(TipoMembresia);
+            delete = TipoMembresia.getId() != null ? Boolean.TRUE : Boolean.FALSE;
             // se realiza el commit
             session.getTransaction().commit();
             // se cierra la session hibernate
@@ -120,32 +117,5 @@ public class ContactDAOImpl implements ContactDAO {
             StandardServiceRegistryBuilder.destroy(HibernateUtil.getRegistry());
         }
         return delete;
-    }
-
-    @Override
-    public List<MeansContacts> getPhoneTypes(PhoneType phoneType) {
-        List<MeansContacts> meansContactsList = null;
-        //completar
-
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            // se inicia una transaccion
-            session.beginTransaction();
-
-            // Query
-            meansContactsList = session.createQuery("SELECT mc FROM MeansContacts mc WHERE mc.phoneType.id = :id ",
-                            MeansContacts.class).setParameter("id", phoneType.getId())
-                    .getResultList();
-
-            // se realiza el commit
-            session.getTransaction().commit();
-            // se cierra la session hibernate
-            session.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            StandardServiceRegistryBuilder.destroy(HibernateUtil.getRegistry());
-        }
-
-        return meansContactsList;
     }
 }

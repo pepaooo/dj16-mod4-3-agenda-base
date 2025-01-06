@@ -1,4 +1,4 @@
-package edu.unam.agenda.hibernate;
+package dj16.com.clubdeportivo.hibernate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
