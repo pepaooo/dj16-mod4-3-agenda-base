@@ -62,11 +62,11 @@ public class ClubDeportivoAPP {
     }
 
     /**
-     * Menú de Miembroos (Miembroo y Medios de Miembroo).
+     * Menú de Miembros (Miembro y Medios de Miembro).
      */
     private void showMiembrosMenu() {
         while (true) {
-            printMenu("Menú Miembroos", "Miembros", "Regresar");
+            printMenu("Menú Miembros", "Miembros", "Regresar");
             int option = getUserOption();
             switch (option) {
                 case 1 -> manageMiembros();
